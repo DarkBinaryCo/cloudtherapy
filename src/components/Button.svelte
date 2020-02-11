@@ -15,11 +15,13 @@
       btnClass = "btn";
   }
 
-  export let size, id;
+  export let id = "";
+  export let size;
 </script>
 
 <style>
   button {
+    display: block;
     border: none;
     color: white;
     background: #2a66df;
@@ -38,23 +40,24 @@
   }
 
   .btn {
-    height: 3rem;
+    padding: 1.5rem 1rem;
     border-radius: 10px;
     min-width: 10rem;
   }
 
   .btn-sm {
-    height: 2rem;
+    padding: 1rem;
     border-radius: 5px;
     min-width: 8rem;
   }
   .btn-lg {
-    height: 4rem;
+    padding: 1.5rem 1rem;
     border-radius: 15px;
     min-width: 12rem;
+    font-size: 0.85rem;
   }
   .btn-xl {
-    height: 5rem;
+    padding: 2.5rem 1rem;
     font-size: 1.2rem;
     border-radius: 15px;
     min-width: 20rem;
