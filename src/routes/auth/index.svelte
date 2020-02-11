@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import { authSuccessCallback } from "./_auth";
+  import TopNav from "../../components/TopNav.svelte";
 
   let authIsLoading = false;
 
@@ -42,12 +43,13 @@
 </script>
 
 <style>
-  .vh-100 {
+  .container {
     height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #fafafa;
   }
 
   h1 {
@@ -64,7 +66,8 @@
   }
 </style>
 
-<div class="vh-100">
+<TopNav />
+<div class="container">
   <h1 transition:fade>Hi there</h1>
   <p transition:fade>Let's get started</p>
 
@@ -72,10 +75,6 @@
 </div>
 
 <svelte:head>
-  <link
-    type="text/css"
-    rel="stylesheet"
-    href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
   <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js">
 
   </script>
