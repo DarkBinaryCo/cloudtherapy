@@ -1,0 +1,60 @@
+<style>
+  nav {
+    width: 100%;
+    height: 5rem;
+    background: #fff;
+    border-top: 1px solid #e3e3e3;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+  }
+  .nav-item {
+    width: 5rem;
+    height: 4rem;
+    margin: 0 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+  }
+
+  .nav-item a {
+    text-decoration: none;
+  }
+
+  .nav-item img {
+    display: flex;
+    margin: auto;
+    height: 2.4rem;
+  }
+
+  .nav-item span {
+    margin-top: 0.1rem;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+</style>
+
+<nav>
+  <div class="nav-item">
+    <a href="user/chats" prefetch>
+      <img src="icons/comment.svg" alt="" />
+      <span>Chats</span>
+    </a>
+  </div>
+  <div class="nav-item">
+    <a href="user/therapists" prefetch>
+      <img src="icons/heart.svg" alt="" />
+      <span>Therapists</span>
+    </a>
+  </div>
+  <div class="nav-item">
+    <a href="peer/profile" prefetch>
+      <img src="icons/user.svg" alt="" />
+      <span>Profile</span>
+    </a>
+  </div>
+</nav>
