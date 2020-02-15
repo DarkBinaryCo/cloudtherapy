@@ -1,20 +1,8 @@
 <script>
-  let btnClass = "md";
-  $: switch (size) {
-    case "sm":
-      btnClass = "btn-sm";
-      break;
-    case "lg":
-      btnClass = "btn-lg";
-      break;
-    case "xl":
-      btnClass = "btn-xl";
-      break;
-    default:
-      // Normal button - md
-      btnClass = "btn";
+  let btnClass = "btn-md";
+  $: if (size) {
+    btnClass = `btn-${size}`;
   }
-
   export let id = "";
   export let size;
 </script>
@@ -39,16 +27,15 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   }
 
-  .btn {
-    padding: 1.5rem 1rem;
-    border-radius: 10px;
-    min-width: 10rem;
-  }
-
   .btn-sm {
     padding: 1rem;
     border-radius: 5px;
     min-width: 8rem;
+  }
+  .btn-md {
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    min-width: 10rem;
   }
   .btn-lg {
     padding: 1.5rem 1rem;
