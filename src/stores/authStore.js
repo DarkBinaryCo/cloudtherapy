@@ -4,7 +4,7 @@ import {
 
 // Default data for our store 
 const defaultAuthData = {
-    loggedIn: false
+    isLoggedIn: false
 };
 
 // Create and export the store

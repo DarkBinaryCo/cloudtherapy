@@ -18,7 +18,8 @@ const handleAuthChanged = async user => {
         authStore.update(storeVal => {
             storeVal = {
                 ...storeVal,
-                ...userFromApi
+                ...userFromApi,
+                isLoggedIn: true
             };
 
             return storeVal;

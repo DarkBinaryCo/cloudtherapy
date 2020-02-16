@@ -1,7 +1,17 @@
 <script>
-  import BottomNav from "../components/BottomNav.svelte";
+  // Svelte imports
+  import { onMount } from "svelte";
 
-  // export const segment;
+  // Custom imports
+  import LoadingPage from "../components/LoadingPage.svelte";
+  import { authStore } from "../stores/authStore";
+  import { handleAuthChanged } from "../callbacks/auth";
+
+  //* LIFECYCLE METHODS
+  onMount(() => {
+    // Firebase Auth state changed ~ triggered when user is logged in/out
+    firebase.auth().onAuthStateChanged(handleAuthChanged);
+  });
 </script>
 
 <style>
@@ -17,5 +27,9 @@
 </style>
 
 <main>
-  <slot />
+  {#if $authStore.isLoggingIn === true}
+    <LoadingPage />
+  {:else}
+    <slot />
+  {/if}
 </main>
