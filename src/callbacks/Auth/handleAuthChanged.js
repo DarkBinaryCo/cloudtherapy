@@ -5,7 +5,7 @@ import {
 /** Handle any changes to auth state ~ firebase */
 const handleAuthChanged = async user => {
     authStore.set({
-        isLoggingIn: false
+        isLoadingAuth: false
     });
 
     // User is logged in

@@ -27,7 +27,7 @@
 </style>
 
 <main>
-  {#if $authStore.isLoggingIn === true}
+  {#if $authStore.isLoadingAuth === true}
     <LoadingPage />
   {:else}
     <slot />
