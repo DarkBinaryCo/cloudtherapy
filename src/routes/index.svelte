@@ -1,9 +1,7 @@
 <script>
+  import { fade } from "svelte/transition";
+  import { SITE_NAME } from "../constants";
   import Button from "../components/Button.svelte";
-
-  let goToAuth = () => {
-    window.location.href = "/auth";
-  };
 </script>
 
 <style>
@@ -26,6 +24,7 @@
   }
 
   .container {
+    align-items: center;
     justify-content: center;
   }
 
@@ -46,10 +45,10 @@
 </style>
 
 <svelte:head>
-  <title>{'SITE_NAME'}</title>
+  <title>Find someone to talk to | {SITE_NAME}</title>
 </svelte:head>
 
-<div class="d-flex container" id="bg-img">
+<div class="d-flex container" id="bg-img" transition:fade>
   <h1>
     It's okay
     <br />
@@ -57,6 +56,6 @@
   </h1>
   <p>Share your issues with peers going through the same thing anonymously</p>
   <div class="btn-container">
-    <Button size="lg" on:click={goToAuth}>Get started</Button>
+    <Button size="lg" type="link" href="auth">Get started</Button>
   </div>
 </div>
