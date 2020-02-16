@@ -1,10 +1,13 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { authSuccessCallback } from "./_auth";
+  import { handleAuthSuccess } from "../../callbacks/auth";
+  import { authStore } from "../../stores/authStore";
   import TopNav from "../../components/TopNav.svelte";
 
-  let authIsLoading = false;
+  $: if ($authStore.isLoggedIn) {
+    window.location.replace("user/chats");
+  }
 
   onMount(() => {
     const ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -29,8 +32,12 @@
     // Start signin flow
     ui.start("#auth-container", {
       callbacks: {
-        signInSuccessWithAuthResult: authSuccessCallback,
-        uiShown: () => (authIsLoading = true)
+        signInSuccessWithAuthResult: handleAuthSuccess,
+        uiShown: () =>
+          authStore.update(val => {
+            val.isLoggedIn = true;
+            return val;
+          })
       },
       signInSuccessUrl: "http://localhost:3000/user/chats",
       signinOptions,
@@ -70,12 +77,8 @@
 <div class="container">
   <h1 transition:fade>Hi there</h1>
   <p transition:fade>Let's get started</p>
-
   <div id="auth-container" />
+  {#if $authStore.isLoggedIn}
+    <p>Redirecting you...</p>
+  {/if}
 </div>
-
-<svelte:head>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js">
-
-  </script>
-</svelte:head>
