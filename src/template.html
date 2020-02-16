@@ -32,6 +32,18 @@
 	     because `src/client.js` references it -->
 	<div id='sapper'>%sapper.html%</div>
 
+
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+
+	<script
+		src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"
+		dns-prefetch>
+	</script>
+	
 	<script>
 	    // Your web app's Firebase configuration
 		const firebaseConfig = {
@@ -49,13 +61,6 @@
 			firebase.initializeApp(firebaseConfig);
 		}
 	</script>
-	
-	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-
-	<!-- Add Firebase products that you want to use -->
-	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
-
 	<!-- Sapper creates a <script> tag containing `src/client.js`
 	     and anything else it needs to hydrate the app and
 	     initialise the router -->
