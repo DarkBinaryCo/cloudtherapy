@@ -3,12 +3,21 @@
   $: if (size) {
     btnClass = `btn-${size}`;
   }
+
+  //* EXPORTS
   export let id = "";
+  export let href = "";
   export let size;
+  export let type = "button";
+
+  // Change the button type to link if a href attribute is specified
+  $: if (type === "button" && href.length) {
+    type = "link";
+  }
 </script>
 
 <style>
-  button {
+  .btn {
     display: block;
     border: none;
     color: white;
@@ -16,11 +25,12 @@
     text-transform: uppercase;
     font-size: 0.75rem;
     padding: auto 1rem;
+    text-decoration: none;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   }
 
-  button:focus,
-  button:hover {
+  .btn:focus,
+  .btn:hover {
     outline: none;
     background: #16439e;
     transition: 0.5s;
@@ -28,9 +38,9 @@
   }
 
   .btn-sm {
-    padding: 1rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 5px;
-    min-width: 8rem;
+    min-width: 6.4rem;
   }
   .btn-md {
     padding: 1.5rem 1rem;
@@ -51,6 +61,12 @@
   }
 </style>
 
-<button on:click class={btnClass} {id}>
-  <slot>Button</slot>
-</button>
+{#if type === 'button'}
+  <button on:click class="btn {btnClass}" {id}>
+    <slot>Button</slot>
+  </button>
+{:else}
+  <a {href} class="btn {btnClass}">
+    <slot>Button</slot>
+  </a>
+{/if}
