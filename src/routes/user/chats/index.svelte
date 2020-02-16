@@ -25,7 +25,7 @@
     height: 4rem;
     background: #fff;
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 0 !important;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -92,19 +92,10 @@
   .button-container {
     margin: auto;
   }
-
-  .nav-right {
-    display: flex;
-    flex-grow: 1;
-  }
-
-  #btn-top-nav {
-    margin-left: auto;
-  }
 </style>
 
 <TopNav>
-  <div class="nav-right">
+  <div slot="right">
     <Button size="sm" id="btn-top-nav" on:click={findPeers}>Find Peers</Button>
   </div>
 </TopNav>
@@ -116,7 +107,7 @@
       <div class="chats">
         <!-- {#each chats as chat} -->
         <div class="chat-item container">
-          <a href="user/chats">
+          <a href="user/chats/112345">
             <h4 class="chat-title">Random Name</h4>
             <span class="chat-text">
               Some Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -131,7 +122,7 @@
           </a>
         </div>
         <div class="chat-item">
-          <a href="user/chats">
+          <a href="user/chats/4321">
             <h4 class="chat-title">Random Name</h4>
             <span class="chat-text">
               Some Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -171,4 +162,4 @@
   </PageLoading>
 {/if}
 
-<BottomNav />
+<BottomNav active="chats" />
