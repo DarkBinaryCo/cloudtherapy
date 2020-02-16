@@ -1,9 +1,16 @@
 <script>
   const goBack = () => {
-    window.history.back();
+    if (backLink.length) {
+      window.location.replace(backLink);
+    } else {
+      window.history.back();
+    }
   };
 
   export let hasBack = true;
+  export let backLink = "";
+
+  const goHome = () => window.location.replace("/");
 </script>
 
 <style>
@@ -44,6 +51,12 @@
   button img {
     height: 20px;
   }
+
+  /* Push content to the right */
+  .right {
+    margin-left: auto;
+    margin-right: 3.6rem;
+  }
 </style>
 
 <div class="top-nav">
@@ -53,9 +66,17 @@
     </button>
   {/if}
 
-  <a href=".">Speed Therapy</a>
+  <slot name="title">
+    <a on:click={goHome} href="#!">Speed Therapy</a>
+  </slot>
 
   <slot>
     <!-- optional fallback -->
   </slot>
+
+  <div class="right">
+    <slot name="right">
+      <!-- optional fallback -->
+    </slot>
+  </div>
 </div>
