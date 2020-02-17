@@ -4,7 +4,9 @@ import {
 
 /** Get a single therapist */
 const getSingleTherapist = async (therapistId) => {
-    return;
+    const _requestUrl = `${BASE_API_URL}/therapists/${therapistId}`;
+
+    return fetch(_requestUrl);
 };
 
 //* EXPORTS

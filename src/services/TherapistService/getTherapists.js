@@ -6,7 +6,9 @@ import {
  * @param {Object} filters Optional filters to filter what kind of therapists we want
  */
 const getTherapists = async (filters = {}) => {
-    return;
+    const _requestUrl = `${BASE_API_URL}/therapists`;
+
+    return fetch(_requestUrl);
 };
 
 
