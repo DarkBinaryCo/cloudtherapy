@@ -20,8 +20,13 @@
 </style>
 
 <div class="loading-container">
+  <h2>
+    <slot name="title">
+      <!-- optional fallback -->
+    </slot>
+  </h2>
   <OverlappingSpinner />
   <h2>
-    <slot>Just a sec</slot>
+    <slot name="description">Just a sec</slot>
   </h2>
 </div>
