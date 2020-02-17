@@ -45,12 +45,12 @@
   .btn-md {
     padding: 1.5rem 1rem;
     border-radius: 10px;
-    min-width: 10rem;
+    min-width: 15rem;
   }
   .btn-lg {
     padding: 1.5rem 1rem;
     border-radius: 15px;
-    min-width: 12rem;
+    min-width: 16rem;
     font-size: 0.85rem;
   }
   .btn-xl {
