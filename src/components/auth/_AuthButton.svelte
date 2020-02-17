@@ -1,5 +1,5 @@
 <script>
-  export let classes = "";
+  export let className = "";
 </script>
 
 <style>
@@ -8,7 +8,7 @@
   }
 
   .btn {
-    min-width: 15rem;
+    min-width: 18rem;
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -23,13 +23,15 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   }
 
-  .btn:hover,
-  .btn:focus {
+  .btn:hover {
     outline: none;
     transition: 0.5s;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.555);
   }
-
+  .btn:focus {
+    font-size: 1rem;
+  }
   .prepend {
     margin-right: 0.5rem;
   }
@@ -39,7 +41,7 @@
   }
 </style>
 
-<button class="btn {classes}" on:click>
+<button class="btn {className}" on:click>
   <div class="prepend">
     <slot name="prepend" />
   </div>

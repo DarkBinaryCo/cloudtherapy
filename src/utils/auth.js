@@ -25,7 +25,7 @@ const _getProvider = (providerName) => {
             authProvider = facebookProvider;
             break;
         case 'twitter':
-            twitterProvider = twitterProvider;
+            authProvider = twitterProvider;
             break;
         default:
             console.error(`invalid provider "${providerName}" provided. Current options are "facebook", "google and "twitter`);
@@ -35,18 +35,18 @@ const _getProvider = (providerName) => {
 }
 
 /** Sign the user in using a redirect */
-const signinWithRedirect = (providerName) => {
+const signInWithRedirect = (providerName) => {
     let authProvider = _getProvider(providerName);
     firebaseAuth.signInWithRedirect(authProvider);
 }
 
 /** Sign the user in using a popup */
-const signinWithPopup = (providerName) => {
+const signInWithPopup = (providerName) => {
     let authProvider = _getProvider(providerName);
     return firebaseAuth.signInWithPopup(authProvider);
 }
 
-export default {
-    signinWithRedirect,
-    signinWithPopup
+export {
+    signInWithRedirect,
+    signInWithPopup
 }

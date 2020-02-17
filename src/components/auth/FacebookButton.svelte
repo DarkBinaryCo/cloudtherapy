@@ -1,11 +1,11 @@
 <script>
-  import AuthUtils from "../../utils/auth";
+  import { signInWithRedirect } from "../../utils/auth";
 
   // Components
   import AuthButton from "./_AuthButton.svelte";
 
   // Signin with google
-  const googleSignin = () => AuthUtils.signInWithRedirect("google");
+  const facebookSignin = () => signInWithRedirect("facebook");
 </script>
 
 <style>
@@ -19,7 +19,7 @@
   }
 </style>
 
-<AuthButton classes="facebook-btn">
+<AuthButton className="facebook-btn" on:click={facebookSignin}>
   <img src="logos/facebook.svg" alt="Facebook logo" slot="prepend" />
   <slot>Continue with Facebook</slot>
 </AuthButton>

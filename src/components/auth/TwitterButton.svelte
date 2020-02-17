@@ -1,11 +1,11 @@
 <script>
-  import AuthUtils from "../../utils/auth";
+  import { signInWithRedirect } from "../../utils/auth";
 
   // Components
   import AuthButton from "./_AuthButton.svelte";
 
   // Signin with google
-  const googleSignin = () => AuthUtils.signInWithRedirect("google");
+  const twitterSignin = () => signInWithRedirect("twitter");
 </script>
 
 <style>
@@ -19,7 +19,7 @@
   }
 </style>
 
-<AuthButton classes="twitter-btn">
+<AuthButton className="twitter-btn" on:click={twitterSignin}>
   <img src="logos/twitter.svg" alt="Twitter logo" slot="prepend" />
   <slot>Continue with Twitter</slot>
 </AuthButton>
