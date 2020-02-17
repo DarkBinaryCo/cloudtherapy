@@ -11,12 +11,6 @@
 	<link rel='stylesheet' href='global.css'>
 	<link rel='manifest' href='manifest.json'>
 	<link rel='icon' type='image/png' href='favicon.png'>
-	 <link
-    type="text/css"
-    rel="stylesheet"
-    href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css"
-    preload
-    dns-prefetch />
 	<!-- Sapper generates a <style> tag containing critical CSS
 	     for the current page. CSS for the rest of the app is
 	     lazily loaded when it precaches secondary pages -->
@@ -32,40 +26,13 @@
 	     because `src/client.js` references it -->
 	<div id='sapper'>%sapper.html%</div>
 
-
-	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-
-	<!-- Add Firebase products that you want to use -->
-	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
-
-	<script
-		src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"
-		dns-prefetch>
-	</script>
-	
-	<script>
-	    // Your web app's Firebase configuration
-		const firebaseConfig = {
-		apiKey: "AIzaSyABp8joIlXkM8mTfqlWkU0WtoB9H4VLL98",
-		authDomain: "ltai-9957c.firebaseapp.com",
-		databaseURL: "https://ltai-9957c.firebaseio.com",
-		projectId: "ltai-9957c",
-		storageBucket: "ltai-9957c.appspot.com",
-		messagingSenderId: "786673713024",
-		appId: "1:786673713024:web:92e4963ede74ea100e8b65",
-		measurementId: "G-GTQJ3K8QGK"
-		};
-		// Initialize Firebase
-		if (!firebase.apps.length) {
-			firebase.initializeApp(firebaseConfig);
-		}
-	</script>
 	<!-- Sapper creates a <script> tag containing `src/client.js`
 	     and anything else it needs to hydrate the app and
 	     initialise the router -->
 	%sapper.scripts%
 
+
+  </script>
 </body>
 
 </html>
