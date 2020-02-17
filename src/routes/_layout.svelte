@@ -3,14 +3,16 @@
   import { onMount } from "svelte";
 
   // Custom imports
-  import LoadingPage from "../components/LoadingPage.svelte";
   import { authStore } from "../stores/authStore";
+  import { auth as firebaseAuth } from "../utils/firebase";
   import AuthCallbacks from "../callbacks/Auth";
+
+  import LoadingPage from "../components/LoadingPage.svelte";
 
   //* LIFECYCLE METHODS
   onMount(() => {
     // Firebase Auth state changed ~ triggered when user is logged in/out
-    firebase.auth().onAuthStateChanged(AuthCallbacks.handleAuthChanged);
+    firebaseAuth.onAuthStateChanged(AuthCallbacks.handleAuthChanged);
   });
 </script>
 
