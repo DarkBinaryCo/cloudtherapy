@@ -1,51 +1,33 @@
 <script>
+  // Svelte
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import AuthCallbacks from "../../callbacks/Auth";
-  import { authStore } from "../../stores/authStore";
-  import TopNav from "../../components/TopNav.svelte";
 
+  // Firebase
+  import { firebase, auth as firebaseAuth } from "../../utils/firebase";
+
+  // Callbacks
+  import AuthCallbacks from "../../callbacks/Auth";
+
+  // Store
+  import { authStore } from "../../stores/authStore";
+
+  // Components
+  import TopNav from "../../components/TopNav.svelte";
+  import GoogleButton from "../../components/auth/GoogleButton.svelte";
+  import FacebookButton from "../../components/auth/FacebookButton.svelte";
+  import TwitterButton from "../../components/auth/TwitterButton.svelte";
+
+  //? Redirect user to chat if they are logged in
   $: if ($authStore.isLoggedIn) {
     window.location.replace("user/chats");
   }
 
   onMount(() => {
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-    // Provider options
-    const signinOptions = [
-      {
-        provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        scopes: ["https://www.googleapis.com/auth/contacts.readonly"],
-        customParameters: {
-          // Forces account selection even when one account is available.
-          prompt: "select_account"
-        }
-      },
-      {
-        provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        scopes: ["public_profile", "email"]
-      },
-      firebase.auth.TwitterAuthProvider.PROVIDER_ID
-    ];
-
-    // Start signin flow
-    ui.start("#auth-container", {
-      callbacks: {
-        signInSuccessWithAuthResult: AuthCallbacks.handleAuthSuccess,
-        uiShown: () =>
-          authStore.update(val => {
-            val.isLoggedIn = true;
-            return val;
-          })
-      },
-      signInSuccessUrl: "http://localhost:3000/user/chats",
-      signinOptions,
-      // Terms of service url.
-      tosUrl: "terms",
-      // Privacy policy url.
-      privacyPolicyUrl: "privacy-policy"
-    });
+    firebaseAuth
+      .getRedirectResult()
+      .then(AuthCallbacks.handleAuthSuccess)
+      .catch(AuthCallbacks.handleAuthFailed);
   });
 </script>
 
@@ -77,8 +59,19 @@
 <div class="container">
   <h1 transition:fade>Hi there</h1>
   <p transition:fade>Let's get started</p>
-  <div id="auth-container" />
+
+  <div id="auth-container">
+    <GoogleButton />
+    <FacebookButton />
+    <TwitterButton />
+  </div>
   {#if $authStore.isLoggedIn}
     <p>Redirecting you...</p>
   {/if}
 </div>
+
+<svelte:head>
+  <!-- <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js">
+
+  </script> -->
+</svelte:head>
