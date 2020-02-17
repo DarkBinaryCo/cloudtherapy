@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
   // Custom imports
-  import { authStore } from "../stores/authStore";
+  import { authStore } from "../stores";
   import { auth as firebaseAuth } from "../utils/firebase";
   import AuthCallbacks from "../callbacks/Auth";
 

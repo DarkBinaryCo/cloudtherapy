@@ -8,4 +8,6 @@ const defaultAuthData = {
 };
 
 // Create and export the store
-export const authStore = writable(defaultAuthData);
+const authStore = writable(defaultAuthData);
+
+export default authStore;

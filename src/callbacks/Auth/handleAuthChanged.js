@@ -1,6 +1,6 @@
 import {
     authStore
-} from '../../stores/authStore';
+} from '../../stores';
 
 import AuthService from '../../services/AuthService';
 
