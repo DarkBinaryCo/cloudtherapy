@@ -63,10 +63,14 @@
 
 {#if type === 'button'}
   <button on:click class="btn {btnClass}" {id}>
+    <slot name="prepend" />
     <slot>Button</slot>
+    <slot name="append" />
   </button>
 {:else}
-  <a {href} class="btn {btnClass}">
+  <a {href} class="btn {btnClass}" {id}>
+    <slot name="prepend" />
     <slot>Button</slot>
+    <slot name="append" />
   </a>
 {/if}
