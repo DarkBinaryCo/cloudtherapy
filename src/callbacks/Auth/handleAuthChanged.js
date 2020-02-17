@@ -1,5 +1,6 @@
 import {
-    authStore
+    authStore,
+    userStore
 } from '../../stores';
 
 import AuthService from '../../services/AuthService';
@@ -16,17 +17,23 @@ const handleAuthChanged = async user => {
         const authDataFromApi = await AuthService.getAuthUser(user.uid);
         if (!authDataFromApi) return;
 
-        let userFromApi = authDataFromApi.data();
-
+        // Update auth details
         authStore.update(storeVal => {
             storeVal = {
                 ...storeVal,
-                ...userFromApi,
                 isLoggedIn: true
             };
 
             return storeVal;
         });
+
+        // Update user details
+        let userFromApi = authDataFromApi.data;
+        userStore.update((storeVal) => {
+            storeVal = userFromApi;
+            return storeVal;
+        });
+
     } else {
         console.log('user logged out')
         // Not logged in
