@@ -5,7 +5,7 @@
   // Custom imports
   import LoadingPage from "../components/LoadingPage.svelte";
   import { authStore } from "../stores/authStore";
-  import AuthCallbacks from "../callbacks/auth";
+  import AuthCallbacks from "../callbacks/Auth";
 
   //* LIFECYCLE METHODS
   onMount(() => {

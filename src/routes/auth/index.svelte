@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import AuthCallbacks from "../../callbacks/auth";
+  import AuthCallbacks from "../../callbacks/Auth";
   import { authStore } from "../../stores/authStore";
   import TopNav from "../../components/TopNav.svelte";
 
