@@ -4,11 +4,13 @@
     Each function corresponds to a file in the `stores/` directory
 */
 import authStore from './authStore';
+import chatStore from './chatStore';
 import userStore from './userStore';
 
 
 //* EXPORTS
 export {
     authStore,
-    userStore
+    userStore,
+    chatStore
 }
