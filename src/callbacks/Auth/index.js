@@ -5,8 +5,10 @@
 */
 import handleAuthChanged from './handleAuthChanged';
 import handleAuthSuccess from './handleAuthSuccess';
+import handleAuthFailed from './handleAuthFailed';
 
 export default {
     handleAuthChanged,
-    handleAuthSuccess
+    handleAuthSuccess,
+    handleAuthFailed
 }
