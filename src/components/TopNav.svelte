@@ -1,4 +1,7 @@
 <script>
+  export let hasBack = true;
+  export let backLink = "";
+
   const goBack = () => {
     if (backLink.length) {
       window.location.replace(backLink);
@@ -6,10 +9,6 @@
       window.history.back();
     }
   };
-
-  export let hasBack = true;
-  export let backLink = "";
-
   const goHome = () => window.location.replace("/");
 </script>
 
