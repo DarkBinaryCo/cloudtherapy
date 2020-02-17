@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { handleAuthSuccess } from "../../callbacks/auth";
+  import AuthCallbacks from "../../callbacks/auth";
   import { authStore } from "../../stores/authStore";
   import TopNav from "../../components/TopNav.svelte";
 
@@ -32,7 +32,7 @@
     // Start signin flow
     ui.start("#auth-container", {
       callbacks: {
-        signInSuccessWithAuthResult: handleAuthSuccess,
+        signInSuccessWithAuthResult: AuthCallbacks.handleAuthSuccess,
         uiShown: () =>
           authStore.update(val => {
             val.isLoggedIn = true;

@@ -5,12 +5,12 @@
   // Custom imports
   import LoadingPage from "../components/LoadingPage.svelte";
   import { authStore } from "../stores/authStore";
-  import { handleAuthChanged } from "../callbacks/auth";
+  import AuthCallbacks from "../callbacks/auth";
 
   //* LIFECYCLE METHODS
   onMount(() => {
     // Firebase Auth state changed ~ triggered when user is logged in/out
-    firebase.auth().onAuthStateChanged(handleAuthChanged);
+    firebase.auth().onAuthStateChanged(AuthCallbacks.handleAuthChanged);
   });
 </script>
 
