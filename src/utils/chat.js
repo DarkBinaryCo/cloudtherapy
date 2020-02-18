@@ -4,6 +4,13 @@ import {
 
 let userId;
 
+/** Returns true if message is from the currently logged in user and false if not 
+ * @param {Object} chatMessage The message object containing information on who the message is from and who it was going to
+ */
+const isSelf = (chatMessage) => {
+    return chatMessage.from === userId;
+}
+
 /** Get the other user in a chat */
 const getOtherUser = ({
     initiator,
@@ -18,5 +25,6 @@ userStore.subscribe(user => {
 })
 
 export default {
-    getOtherUser
+    getOtherUser,
+    isSelf
 }
