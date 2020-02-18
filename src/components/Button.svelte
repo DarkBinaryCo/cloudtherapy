@@ -43,7 +43,7 @@
     min-width: 6.4rem;
   }
   .btn-md {
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem;
     border-radius: 10px;
     min-width: 15rem;
   }
