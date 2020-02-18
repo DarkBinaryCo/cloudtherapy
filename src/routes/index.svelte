@@ -28,11 +28,6 @@
     justify-content: center;
   }
 
-  .btn-container {
-    width: 12rem;
-    margin: 0 auto;
-  }
-
   #bg-img {
     width: 100%;
     height: 100%;
@@ -41,6 +36,10 @@
     background-position-x: left;
     background-position-y: top;
     background-repeat: no-repeat;
+  }
+
+  .d-none {
+    display: none;
   }
 </style>
 
@@ -55,7 +54,12 @@
     not to be okay
   </h1>
   <p>Share your issues with peers going through the same thing anonymously</p>
-  <div class="btn-container">
+  <div>
     <Button size="lg" type="link" href="auth">Get started</Button>
   </div>
 </div>
+
+<a href="user/chats" class="d-none">Crawler Hidden link</a>
+<a href="user/therapists" class="d-none">Crawler Hidden link</a>
+<a href="peer/profile" class="d-none">Crawler Hidden link</a>
+<a href="therapist/profile" class="d-none">Crawler Hidden link</a>
