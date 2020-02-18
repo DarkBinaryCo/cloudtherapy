@@ -1,19 +1,29 @@
 <script>
+  // Svelte
   import { onMount } from "svelte";
+
+  // Utils
+  import { logout } from "../../utils/auth";
+
+  // Components
   import Button from "../../components/Button.svelte";
+  import TopNav from "../../components/TopNav.svelte";
 
   let gender = "male";
   let generatedName = "";
 
   let inputGenerateName;
 
-  function generateName() {
+  // Generate a random name based on gender
+  const generateName = () => {
     const nameGeneratorOptions = { nationality: "en", gender };
     generatedName = chance.name(nameGeneratorOptions);
     return generatedName;
-  }
+  };
 
-  onMount(() => generateName());
+  onMount(() => {
+    generateName();
+  });
 </script>
 
 <style>
@@ -61,11 +71,8 @@
     border: 1px solid #535353;
   }
 
-  .btn-complete-wrapper {
-    width: 10rem;
-    margin-top: 2rem;
-    margin-left: auto;
-    margin-right: auto;
+  :global(#btn-complete-profile) {
+    margin: auto;
   }
 
   .btn-generate-name {
@@ -73,7 +80,14 @@
   }
 </style>
 
+<TopNav>
+  <div slot="right">
+    <Button size="sm" id="btn-top-nav" on:click={logout}>Logout</Button>
+  </div>
+</TopNav>
+
 <div class="container">
+  <!-- TODO: Toggle this text based on whether user is a new user or not -->
   <h1>Welcome</h1>
   <div class="input-container">
     <label for="inputName">Made up name</label>
@@ -110,12 +124,12 @@
   </div>
 
   <div class="btn-complete-wrapper ">
-    <Button>Complete profile</Button>
+    <Button id="btn-complete-profile">Complete profile</Button>
   </div>
 </div>
 
 <svelte:head>
-  <script src="./js/chance.min.js">
+  <script src="js/chance.min.js">
 
   </script>
 </svelte:head>
