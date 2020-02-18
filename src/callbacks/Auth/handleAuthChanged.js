@@ -1,9 +1,15 @@
+// Callbacks
+//TODO: Refactor this to import from `callbacks/Auth/` for consitency
+import handleAuthSuccess from './handleAuthSuccess';
+
+// Services
+import AuthService from '../../services/AuthService';
+
+// Stores
 import {
     authStore,
     userStore
 } from '../../stores';
-
-import AuthService from '../../services/AuthService';
 
 /** Handle any changes to auth state ~ firebase */
 const handleAuthChanged = async user => {
@@ -13,8 +19,9 @@ const handleAuthChanged = async user => {
 
     // User is logged in
     if (user) {
-        console.log('user is logged in');
+        handleAuthSuccess(user);
         const authDataFromApi = await AuthService.getAuthUser(user.uid);
+
         if (!authDataFromApi) return;
 
         // Update auth details
@@ -28,9 +35,12 @@ const handleAuthChanged = async user => {
         });
 
         // Update user details
-        let userFromApi = authDataFromApi.data;
+        let userFromApi = authDataFromApi.data.data;
+
         userStore.update((storeVal) => {
             storeVal = userFromApi;
+            console.log("User Store val");
+            console.log(storeVal)
             return storeVal;
         });
 

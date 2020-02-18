@@ -1,14 +1,11 @@
-const handleAuthSuccess = ({
-    user,
-    credential
-}, redirectUrl) => {
-    console.log("Done logging in!");
+// Services
+import AuthService from '../../services/AuthService';
+
+const handleAuthSuccess = (user) => {
     let userData = {
         email: user.email,
         emailVerified: user.emailVerified,
-        name: user.displayName,
-        provider: credential.providerId,
-        signInMethod: credential.signInMethod,
+        name: user.displayName
     };
 
     AuthService.authUser(user.uid, userData)
@@ -22,6 +19,4 @@ const handleAuthSuccess = ({
     return true;
 }
 
-export default {
-    handleAuthSuccess
-}
+export default handleAuthSuccess;

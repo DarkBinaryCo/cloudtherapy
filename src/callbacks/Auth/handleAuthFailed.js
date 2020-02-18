@@ -3,6 +3,4 @@ const handleAuthFailed = (error) => {
     console.error(`Reason: ${error}`);
 };
 
-export default {
-    handleAuthFailed
-};
+export default handleAuthFailed;
