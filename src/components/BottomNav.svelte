@@ -1,6 +1,7 @@
 <style>
   nav {
     width: 100%;
+    max-width: 56em;
     height: 5rem;
     background: #fff;
     border-top: 1px solid #e3e3e3;
@@ -18,6 +19,7 @@
     flex-direction: column;
     align-items: center;
     align-self: center;
+    flex-grow: 1;
   }
 
   .nav-item a {
