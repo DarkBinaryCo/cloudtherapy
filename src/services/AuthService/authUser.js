@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
     BASE_API_URL
 } from '../../constants';
@@ -7,17 +9,14 @@ import {
  * @param {Object} userData An object representing the current user's data
  */
 const authUser = async (uid, userData) => {
-    const requestBody = {
+    const requestData = {
         data: {
             uid,
             user: userData,
         }
     }
 
-    return fetch(`${BASE_API_URL}/auth`, {
-        method: 'post',
-        body: requestBody
-    });
+    return axios.post(`${BASE_API_URL}/auth`, requestData)
 };
 
 export default authUser;

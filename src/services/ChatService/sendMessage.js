@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
     CHAT_API_URL
 } from '../../constants';
@@ -11,15 +13,11 @@ const sendMessage = async (chatId, messageData) => {
     // Send chatId as part of the messageData when creating a message 
     messageData.chatId = chatId;
 
-    const requestBody = {
+    const requestData = {
         data: messageData
     };
 
-    const apiResponse = fetch(_requestUrl, {
-        method: 'post',
-        body: requestBody
-    })
-
+    const apiResponse = axios.post(_requestUrl, requestData);
     return apiResponse;
 };
 

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
     BASE_API_URL
 } from '../../constants';
@@ -6,7 +8,7 @@ import {
  * @param {String} uid The id of the user provided by firebase
  */
 const getAuthUser = async (uid) => {
-    return fetch(`${BASE_API_URL}/user/${uid}`)
+    return axios.get(`${BASE_API_URL}/user/${uid}`)
 };
 
 export default getAuthUser;
