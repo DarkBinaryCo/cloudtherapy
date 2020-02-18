@@ -37,7 +37,9 @@ const _getProvider = (providerName) => {
 /** Sign the user in using a redirect */
 const signInWithRedirect = (providerName) => {
     let authProvider = _getProvider(providerName);
-    firebaseAuth.signInWithRedirect(authProvider);
+    firebaseAuth.signInWithRedirect(authProvider).then(() => {
+        alert("What")
+    });
 }
 
 /** Sign the user in using a popup */
@@ -46,7 +48,19 @@ const signInWithPopup = (providerName) => {
     return firebaseAuth.signInWithPopup(authProvider);
 }
 
+const logout = (redirectUrl = "") => {
+    firebaseAuth.signOut()
+        .then(() => {
+            console.info("Successfully logged out");
+            window.location.replace(redirectUrl);
+        }).catch((err) => {
+            console.error("Failed to sign you out");
+            console.error(err);
+        });
+}
+
 export {
     signInWithRedirect,
-    signInWithPopup
+    signInWithPopup,
+    logout
 }
