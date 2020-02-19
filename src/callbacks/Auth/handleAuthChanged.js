@@ -39,8 +39,6 @@ const handleAuthChanged = async user => {
 
         userStore.update((storeVal) => {
             storeVal = userFromApi;
-            console.log("User Store val");
-            console.log(storeVal)
             return storeVal;
         });
 
