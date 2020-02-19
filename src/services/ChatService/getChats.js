@@ -45,7 +45,6 @@ const getChats = async () => {
 //
 userStore.subscribe((storeVal) => {
     userId = storeVal.uid;
-    console.log(storeVal);
     getChats();
 })
 

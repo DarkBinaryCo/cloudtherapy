@@ -6,13 +6,12 @@ import {
     chatStore
 } from '../../stores';
 
-const _chatMessagesRef = db.collection('chatMessages');
+const _chatMessagesRef = db.collection('messages');
 
 /** Get chat messages belonging to a single chat (chat thread) 
  * @param {String} chatId The id of the chat thread to retrieve messages for 
  */
 const getChatMessages = async (chatId) => {
-    let chatMessages = [];
 
     chatStore.update(storeVal => {
         storeVal.isLoading = true;
@@ -20,13 +19,16 @@ const getChatMessages = async (chatId) => {
     });
 
     return _chatMessagesRef.where('chatId', '==', chatId).onSnapshot(async (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            chatMessages.push(doc.data());
+        let chatMessages = [];
+        querySnapshot.docs.forEach((doc) => {
+            let _chatMessage = doc.data();
+            _chatMessage.id = doc.id;
+            chatMessages.push(_chatMessage);
         });
 
         // Update the store
         chatStore.update(storeVal => {
-            storeVal.chatMessages = chatMessages;
+            storeVal.messages = chatMessages;
             storeVal.isLoading = false;
             return storeVal;
         });
