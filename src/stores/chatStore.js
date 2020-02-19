@@ -5,7 +5,7 @@ import {
 const defaultChatData = {
     isLoading: true,
     chats: [],
-    chatMessages: []
+    messages: []
 }
 
 const chatStore = writable(defaultChatData);
