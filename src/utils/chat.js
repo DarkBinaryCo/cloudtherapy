@@ -8,15 +8,37 @@ let userId;
  * @param {Object} chatMessage The message object containing information on who the message is from and who it was going to
  */
 const isSelf = (chatMessage) => {
-    return chatMessage.from === userId;
+    const _messageIsFromSelf = chatMessage.from === userId;
+
+    return _messageIsFromSelf;
+}
+
+// Check if chat is valid
+const _chatIsValid = (chat) => {
+    if (!chat) return false;
+    else if (!chat.initiator || !chat.prospect) return false;
+    else return true;
+}
+
+/** Get the current user in a chat. Mitigates need to try getting the user from user store */
+const getCurrentUser = (chat) => {
+    const {
+        initiator,
+        prospect
+    } = chat;
+
+    return initiator.uid === userId ? initiator : prospect;
 }
 
 /** Get the other user in a chat */
-const getOtherUser = ({
-    initiator,
-    prospect
-}) => {
-    console.log(`currently logged in user id: ${userId}`);
+const getOtherUser = (chat) => {
+    if (!_chatIsValid(chat)) return {};
+
+    const {
+        initiator,
+        prospect
+    } = chat;
+
     return initiator.uid === userId ? prospect : initiator;
 };
 
@@ -25,6 +47,7 @@ userStore.subscribe(user => {
 })
 
 export default {
+    getCurrentUser,
     getOtherUser,
     isSelf
 }
