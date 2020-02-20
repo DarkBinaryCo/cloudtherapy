@@ -19,6 +19,7 @@ const getChatById = (chatId) => {
         // Update store value of chat found
         chatStore.update(storeVal => {
             storeVal.currentChat = chatFound;
+            storeVal.currentChat.chatId = chatId;
             //? Assumes chat happens between 2 people
             storeVal.currentChat.currentUser = ChatUtils.getCurrentUser(storeVal.currentChat);
             storeVal.currentChat.otherUser = ChatUtils.getOtherUser(storeVal.currentChat);
