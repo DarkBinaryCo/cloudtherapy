@@ -50,6 +50,11 @@ code {
 	flex-direction: column;
 }
 
+.d-flex-reverse {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
 main {
 	height: 100vh;
 	overflow-y: auto;
