@@ -23,8 +23,7 @@
     border-bottom: 1px solid #e3e3e3;
   }
 
-  a {
-    text-decoration: none;
+  .title {
     margin: 0 0.5rem;
     text-transform: uppercase;
     font-size: 13px;
@@ -65,9 +64,11 @@
     </button>
   {/if}
 
-  <slot name="title">
-    <a on:click={goHome} href="#!">Speed Therapy</a>
-  </slot>
+  <div class="title">
+    <slot name="title">
+      <a on:click={goHome} href="#!">Speed Therapy</a>
+    </slot>
+  </div>
 
   <slot>
     <!-- optional fallback -->
