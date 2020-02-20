@@ -3,6 +3,9 @@
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
 
+  // Constants
+  import { SITE_NAME } from "../../../constants";
+
   // Stores
   import { authStore, chatStore, userStore } from "../../../stores";
 
@@ -108,6 +111,10 @@
     margin: auto;
   }
 </style>
+
+<svelte:head>
+  <title>Chats - {SITE_NAME}</title>
+</svelte:head>
 
 <TopNav>
   <!-- Only show this if we have chats - otherwise, we have option at the bottom -->

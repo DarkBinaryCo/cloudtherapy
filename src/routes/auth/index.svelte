@@ -3,6 +3,9 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
 
+  // Constants
+  import { SITE_NAME } from "../../constants";
+
   // Firebase
   import { firebase, auth as firebaseAuth } from "../../utils/firebase";
 
@@ -10,7 +13,7 @@
   import AuthCallbacks from "../../callbacks/Auth";
 
   // Store
-  import { authStore } from "../../stores/authStore";
+  import { authStore } from "../../stores";
 
   // Components
   import TopNav from "../../components/TopNav.svelte";
@@ -55,7 +58,12 @@
   }
 </style>
 
+<svelte:head>
+  <title>SignIn / SignUp - {SITE_NAME}</title>
+</svelte:head>
+
 <TopNav />
+
 <div class="container">
   <h1 transition:fade>Hi there</h1>
   <p transition:fade>Let's get started</p>
@@ -69,9 +77,3 @@
     <p>Redirecting you...</p>
   {/if}
 </div>
-
-<svelte:head>
-  <!-- <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js">
-
-  </script> -->
-</svelte:head>

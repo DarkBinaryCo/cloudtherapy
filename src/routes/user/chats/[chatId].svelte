@@ -15,6 +15,9 @@
   // Svelte
   import { onMount } from "svelte";
 
+  // Constants
+  import { SITE_NAME } from "../../../constants";
+
   // Services
   import ChatService from "../../../services/ChatService";
 
@@ -33,6 +36,11 @@
 
   // Functionality
   let chatMessageContainer;
+  let otherUserName;
+
+  $: otherUserName = $chatStore.currentChat
+    ? $chatStore.currentChat.otherUser.name
+    : "Unknown";
 
   // Lifecycle
   onMount(() => {
@@ -55,12 +63,13 @@
   }
 </style>
 
+<svelte:head>
+
+  <title>Conversation with {otherUserName} - {SITE_NAME}</title>
+</svelte:head>
+
 <TopNav>
-  <div slot="title">
-    {#if $chatStore.currentChat}
-      {$chatStore.currentChat.otherUser.name}
-    {:else}--{/if}
-  </div>
+  <div slot="title">{otherUserName}</div>
   <!-- TODO: Hide/show depending on whether the user is a therapist or not -->
   <div slot="right">
     <!-- <Button size="sm" href=>Call Therapist</Button> -->
