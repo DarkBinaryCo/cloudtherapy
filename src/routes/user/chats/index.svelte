@@ -1,31 +1,44 @@
 <script>
+  // Svelte
   import { fade } from "svelte/transition";
-  import { authStore } from "../../../stores/authStore.js";
+  import { onMount } from "svelte";
+
+  // Stores
+  import { authStore, chatStore, userStore } from "../../../stores";
+
+  // Services
+  import ChatService from "../../../services/ChatService";
+  import PeerService from "../../../services/PeerService";
+
+  // Utils
+  import ChatUtils from "../../../utils/chat";
+  import DateUtils from "../../../utils/date";
+
+  // Components
   import BottomNav from "../../../components/BottomNav.svelte";
   import Button from "../../../components/Button.svelte";
-  import PageLoading from "../../../components/PageLoading.svelte";
+  import LoadingPage from "../../../components/LoadingPage.svelte";
   import TopNav from "../../../components/TopNav.svelte";
 
-  authStore.subscribe(value => {
-    console.log(value);
-  });
-
   let isMatching = false;
-  let findPeers = () => {
+  const findPeers = () => {
     isMatching = true;
 
-    setTimeout(() => (isMatching = false), 2000);
+    PeerService.matchPeers().then(() => {
+      isMatching = false;
+    });
   };
 
-  export let chats = [""];
+  onMount(() => {
+    ChatService.getChats();
+  });
 </script>
 
 <style>
   .chat-item {
     height: 4rem;
     background: #fff;
-    width: 100%;
-    padding: 1rem 0 !important;
+    padding: 1rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -41,7 +54,7 @@
     cursor: pointer;
   }
 
-  .chat-item > a {
+  .chat-item a {
     text-decoration: none;
   }
 
@@ -65,9 +78,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding: 1rem;
   }
-
   .chats-not-found {
     width: 100%;
     text-align: center;
@@ -80,7 +91,7 @@
   }
 
   .chats-not-found h1 {
-    font-size: 2.75rem;
+    font-size: 2.25rem;
     font-weight: bolder;
   }
   .chats-not-found p {
@@ -92,74 +103,73 @@
   .button-container {
     margin: auto;
   }
+
+  :global(#chat-not-found-btn) {
+    margin: auto;
+  }
 </style>
 
 <TopNav>
+  <!-- Only show this if we have chats - otherwise, we have option at the bottom -->
   <div slot="right">
-    <Button size="sm" id="btn-top-nav" on:click={findPeers}>Find Peers</Button>
+    {#if $chatStore.chats.length}
+      <Button size="sm" id="btn-top-nav" on:click={PeerService.matchPeers}>
+        Find Peers
+      </Button>
+    {/if}
   </div>
 </TopNav>
 
 {#if !isMatching}
-  <div class="container" in:fade>
-
-    {#if chats.length}
-      <div class="chats">
-        <!-- {#each chats as chat} -->
-        <div class="chat-item container">
-          <a href="user/chats/112345">
-            <h4 class="chat-title">Random Name</h4>
-            <span class="chat-text">
-              Some Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Ducimus error nisi, blanditiis ratione quam harum exercitationem
-              dolorem impedit autem voluptas neque enim fuga debitis quod,
-              tempora vel placeat! Distinctio, porro?
-            </span>
-
-            <div class="chat-time">
-              <span>14:02</span>
-            </div>
-          </a>
-        </div>
-        <div class="chat-item">
-          <a href="user/chats/4321">
-            <h4 class="chat-title">Random Name</h4>
-            <span class="chat-text">
-              Some Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Ducimus error nisi, blanditiis ratione quam harum exercitationem
-              dolorem impedit autem voluptas neque enim fuga debitis quod,
-              tempora vel placeat! Distinctio, porro?
-            </span>
-
-            <div class="chat-time">
-              <span>14:02</span>
-            </div>
-          </a>
-        </div>
-        <!-- {/each} -->
-      </div>
+  <div class="container full-height" in:fade>
+    <!-- Start of chat store loading check -->
+    {#if $chatStore.isLoading}
+      <LoadingPage>
+        <span slot="title">Getting your chats</span>
+        <span slot="description">Just a sec</span>
+      </LoadingPage>
     {:else}
-      <div class="chats-not-found">
-        <h1>No chats yet</h1>
-        <img src="illustrations/no_data.svg" alt="" />
-        <p>Once you find peers, your chats with them will appear here</p>
+      <div>
+        {#if $chatStore.chats.length}
+          <div class="chats">
+            {#each $chatStore.chats as chat}
+              <div class="chat-item ">
+                <a href={`user/chats/${chat.id}`}>
+                  <h4 class="chat-title">
+                    {ChatUtils.getOtherUser(chat).name}
+                  </h4>
 
-      </div>
+                  <span class="chat-text">
+                    {chat.isNew ? 'New chat 😁' : chat.lastMessage.text}
+                  </span>
 
-      <div class="button-container">
-        <Button size="lg" class="btn-wide" on:click={findPeers}>
-          Find Peers
-        </Button>
+                  <div class="chat-time">
+                    <span>{DateUtils.getTime(chat.dateAdded.seconds)}</span>
+                  </div>
+                </a>
+              </div>
+            {/each}
+          </div>
+        {:else}
+          <div class="chats-not-found">
+            <h1>No chats yet</h1>
+            <img src="illustrations/no_data.svg" alt="" />
+            <p>Once you find peers, your chats with them will appear here</p>
+
+            <div class="button-container">
+              <Button
+                size="md"
+                on:click={PeerService.matchPeers}
+                id="chat-not-found-btn">
+                Find Peers
+              </Button>
+            </div>
+          </div>
+        {/if}
       </div>
     {/if}
+    <!-- End of chat store loading check -->
   </div>
-{:else}
-  <PageLoading>
-    <slot name="title">Loading stuff</slot>
-    <slot name="description">
-      Hold on, I'm loading your stuff. Don't eat me
-    </slot>
-  </PageLoading>
 {/if}
 
 <BottomNav active="chats" />
