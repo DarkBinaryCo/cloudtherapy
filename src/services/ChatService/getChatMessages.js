@@ -18,7 +18,7 @@ const getChatMessages = async (chatId) => {
         return storeVal;
     });
 
-    return _chatMessagesRef.where('chatId', '==', chatId).onSnapshot(async (querySnapshot) => {
+    return _chatMessagesRef.where('chatId', '==', chatId).orderBy('dateSent', 'desc').onSnapshot(async (querySnapshot) => {
         let chatMessages = [];
         querySnapshot.docs.forEach((doc) => {
             let _chatMessage = doc.data();
