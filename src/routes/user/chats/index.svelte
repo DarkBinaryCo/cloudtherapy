@@ -3,6 +3,9 @@
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
 
+  //
+  import toastr from "toastr";
+
   // Constants
   import { SITE_NAME } from "../../../constants";
 
@@ -27,9 +30,22 @@
   const findPeers = () => {
     isMatching = true;
 
-    PeerService.matchPeers().then(() => {
+    setTimeout(() => {
       isMatching = false;
-    });
+      PeerService.matchPeers().then(({ data }) => {
+        const response = data;
+
+        // Peers found
+        if (response.data.count > 0) {
+          const personaNoun = count === 1 ? "match" : "matches";
+          toastr.success(`Found ${count} ${personaNoun}`, "Sweet!");
+        } else {
+          // Peers not found
+          toastr.warning("No matches were found", "");
+        }
+        // isMatching = false;
+      });
+    }, 1000);
   };
 
   onMount(() => {
@@ -120,7 +136,7 @@
   <!-- Only show this if we have chats - otherwise, we have option at the bottom -->
   <div slot="right">
     {#if $chatStore.chats.length}
-      <Button size="sm" id="btn-top-nav" on:click={PeerService.matchPeers}>
+      <Button size="sm" id="btn-top-nav" on:click={findPeers}>
         Find Peers
       </Button>
     {/if}
@@ -164,10 +180,7 @@
             <p>Once you find peers, your chats with them will appear here</p>
 
             <div class="button-container">
-              <Button
-                size="md"
-                on:click={PeerService.matchPeers}
-                id="chat-not-found-btn">
+              <Button size="md" on:click={findPeers} id="chat-not-found-btn">
                 Find Peers
               </Button>
             </div>
@@ -177,6 +190,10 @@
     {/if}
     <!-- End of chat store loading check -->
   </div>
+{:else}
+  <LoadingPage>
+    <span slot="title">Finding your peers</span>
+  </LoadingPage>
 {/if}
 
 <BottomNav active="chats" />
