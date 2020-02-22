@@ -35,6 +35,7 @@
     background: #16439e;
     transition: 0.5s;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
   }
 
   .btn-sm {
