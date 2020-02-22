@@ -58,6 +58,13 @@
 </script>
 
 <style>
+  :global(main) {
+    overflow-y: hidden;
+  }
+  .chat-messages {
+    overflow-y: auto;
+  }
+
   .chat-messages {
     height: calc(100vh - 10rem);
     padding-bottom: 2rem;

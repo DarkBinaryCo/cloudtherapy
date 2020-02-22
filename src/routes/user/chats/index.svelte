@@ -92,11 +92,15 @@
     font-size: 12px;
     color: grey;
   }
+  :global(main) {
+    overflow-y: hidden;
+  }
 
   .container {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    overflow-y: auto;
   }
   .chats-not-found {
     width: 100%;
