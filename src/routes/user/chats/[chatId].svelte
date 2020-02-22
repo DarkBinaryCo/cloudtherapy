@@ -50,7 +50,9 @@
 
     // Store subscription
     chatStore.subscribe(_ => {
-      chatMessageContainer.scrollTop = chatMessageContainer.scrollHeight;
+      if (chatMessageContainer) {
+        chatMessageContainer.scrollTop = chatMessageContainer.scrollHeight;
+      }
     });
   });
 </script>
