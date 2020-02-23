@@ -9,7 +9,6 @@
 <script>
   import { onMount } from "svelte";
   export let active = "";
-
   onMount(() => {});
 </script>
 
