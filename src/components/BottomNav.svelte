@@ -1,3 +1,19 @@
+<script context="module">
+  export async function preload(page, session) {
+    const { chatId } = page.params;
+
+    currChatId = chatId;
+  }
+</script>
+
+<script>
+  import { onMount } from "svelte";
+  export let active = "";
+
+  $: console.log("active: ", active);
+  onMount(() => {});
+</script>
+
 <style>
   nav {
     width: 100%;
@@ -20,6 +36,12 @@
     align-items: center;
     align-self: center;
     flex-grow: 1;
+    border-radius: 10px;
+    padding-top: 0.5rem;
+  }
+
+  .nav-item.active {
+    background: #2269f82e;
   }
 
   .nav-item a {
@@ -41,21 +63,22 @@
 </style>
 
 <nav>
-  <div class="nav-item">
+  <div class="nav-item" class:active={active === 'chats'}>
     <a href="user/chats" prefetch>
-      <img src="icons/comment.svg" alt="" />
+      <img src="icons/comment.svg" alt="Chat icon" />
       <span>Chats</span>
     </a>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" class:active={active === 'therapists'}>
     <a href="user/therapists" prefetch>
-      <img src="icons/heart.svg" alt="" />
+      <img src="icons/heart.svg" alt="Therapist icon" />
       <span>Therapists</span>
     </a>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" class:active={active === 'profile'}>
     <a href="peer/profile" prefetch>
-      <img src="icons/user.svg" alt="" />
+      <img src="icons/user.svg" alt="Profile icon" />
+
       <span>Profile</span>
     </a>
   </div>
