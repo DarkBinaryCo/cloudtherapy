@@ -105,7 +105,7 @@
   </div>
   <div class="input-container">
     <label for="">Gender</label>
-    <select bind:value={gender}>
+    <select bind:value={gender} on:change={generateName}>
       <option value="male">Male</option>
       <option value="female">Female</option>
     </select>
