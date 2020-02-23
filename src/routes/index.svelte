@@ -1,7 +1,12 @@
 <script>
   import { fade } from "svelte/transition";
   import { SITE_NAME } from "../constants";
+  import { authStore } from "../stores";
   import Button from "../components/Button.svelte";
+
+  let isLoggedIn = null;
+
+  $: isLoggedIn = $authStore.isLoggedIn;
 </script>
 
 <style>
@@ -55,7 +60,11 @@
   </h1>
   <p>Share your issues with peers going through the same thing anonymously</p>
   <div>
-    <Button size="lg" type="link" href="auth">Get started</Button>
+    {#if isLoggedIn === true}
+      <Button size="lg" type="link" href="user/chats">Go to chats</Button>
+    {:else if isLoggedIn === false}
+      <Button size="lg" type="link" href="auth">Get started</Button>
+    {/if}
   </div>
 </div>
 
