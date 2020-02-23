@@ -5,6 +5,9 @@
   //
   import toastr from "toastr";
 
+  // Constants
+  import { SITE_NAME } from "../../constants";
+
   // Utils
   import { logout } from "../../utils/auth";
 
@@ -192,6 +195,7 @@
 <BottomNav active="profile" />
 
 <svelte:head>
+  <title>Profile - {SITE_NAME}</title>
   <script src="js/chance.min.js">
 
   </script>
