@@ -48,6 +48,12 @@
     }, 1000);
   };
 
+  // Redirect to profile if user is new
+  $: if ($userStore.isNew === true) {
+    //TODO: Add option to redirect to therapist profile if logged in user is a therapist
+    window.location.replace("/peer/profile");
+  }
+
   onMount(() => {
     ChatService.getChats();
   });
