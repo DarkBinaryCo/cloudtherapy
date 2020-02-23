@@ -46,7 +46,9 @@
   .btn-md {
     padding: 1rem 1rem;
     border-radius: 10px;
+    width: 100%;
     min-width: 15rem;
+    max-width: 20rem;
   }
   .btn-lg {
     padding: 1.5rem 1rem;
