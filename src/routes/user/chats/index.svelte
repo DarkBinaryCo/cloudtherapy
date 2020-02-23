@@ -142,7 +142,7 @@
   <title>Chats - {SITE_NAME}</title>
 </svelte:head>
 
-<TopNav>
+<TopNav hasBack={false}>
   <!-- Only show this if we have chats - otherwise, we have option at the bottom -->
   <div slot="right">
     {#if $chatStore.chats.length}
