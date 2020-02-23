@@ -13,7 +13,7 @@
   import AuthCallbacks from "../../callbacks/Auth";
 
   // Store
-  import { authStore } from "../../stores";
+  import { authStore, userStore } from "../../stores";
 
   // Components
   import TopNav from "../../components/TopNav.svelte";
@@ -23,7 +23,11 @@
 
   //? Redirect user to chat if they are logged in
   $: if ($authStore.isLoggedIn) {
-    window.location.replace("user/chats");
+    if ($userStore.isNew === true) {
+      window.location.replace("peer/profile");
+    } else {
+      window.location.replace("user/chats");
+    }
   }
 
   onMount(() => {
