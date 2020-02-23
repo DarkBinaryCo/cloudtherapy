@@ -5,14 +5,22 @@
   // Utils
   import { logout } from "../../utils/auth";
 
+  // Stores
+  import { userStore } from "../../stores";
+
   // Components
   import Button from "../../components/Button.svelte";
   import TopNav from "../../components/TopNav.svelte";
 
   let gender = "male";
   let generatedName = "";
+  let profileTitle = "";
+  let isNewAccount; // Profile completed or not
 
   let inputGenerateName;
+
+  $: isNewAccount = $userStore.isNew;
+  $: profileTitle = isNewAccount ? "Welcome onboard!" : "Welcome back";
 
   // Generate a random name based on gender
   const generateName = () => {
@@ -32,11 +40,15 @@
   }
 
   .container h1 {
-    font-size: 2.4rem;
     font-weight: bolder;
     text-align: center;
+    margin-bottom: 0.1rem !important;
   }
 
+  .container p {
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
   .input-container label {
     display: block;
     font-size: 12px;
@@ -78,6 +90,10 @@
   .btn-generate-name {
     margin-bottom: 0.4rem;
   }
+
+  .btn-complete-wrapper {
+    margin-top: 2rem;
+  }
 </style>
 
 <TopNav>
@@ -88,7 +104,12 @@
 
 <div class="container">
   <!-- TODO: Toggle this text based on whether user is a new user or not -->
-  <h1>Welcome</h1>
+  <h1 class="text-center">{profileTitle}</h1>
+
+  {#if isNewAccount}
+    <p class="text-center">Please complete your profile to continue</p>
+  {/if}
+
   <div class="input-container">
     <label for="inputName">Made up name</label>
     <input
@@ -116,14 +137,8 @@
       <option value="1">Nairobi</option>
     </select>
   </div>
-  <div class="input-container">
-    <label for="">Sub-County</label>
-    <select name="" id="">
-      <option value="1">Embakasi</option>
-    </select>
-  </div>
 
-  <div class="btn-complete-wrapper ">
+  <div class="btn-complete-wrapper">
     <Button id="btn-complete-profile">Complete profile</Button>
   </div>
 </div>
