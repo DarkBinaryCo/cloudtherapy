@@ -13,6 +13,10 @@
 </script>
 
 <style>
+  a {
+    text-decoration: none;
+  }
+
   .top-nav {
     height: 3.2rem;
     width: 100%;
