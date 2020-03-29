@@ -1,7 +1,7 @@
 <script>
   // Svelte
   import { onMount } from "svelte";
-
+  import Chance from "chance";
   //
   import toastr from "toastr";
 
@@ -37,6 +37,7 @@
 
   // Generate a random name based on gender
   const generateName = () => {
+    const chance = new Chance();
     if (!chance) return;
 
     const nameGeneratorOptions = { nationality: "en", gender };
@@ -196,7 +197,4 @@
 
 <svelte:head>
   <title>Profile - {SITE_NAME}</title>
-  <script src="js/chance.min.js">
-
-  </script>
 </svelte:head>
