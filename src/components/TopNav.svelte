@@ -1,4 +1,5 @@
 <script>
+  import { SITE_NAME } from "../constants";
   export let hasBack = true;
   export let backLink = "";
 
@@ -70,7 +71,7 @@
 
   <div class="title">
     <slot name="title">
-      <a on:click={goHome} href="#!">Speed Therapy</a>
+      <a on:click={goHome} href="#!">{SITE_NAME}</a>
     </slot>
   </div>
 
